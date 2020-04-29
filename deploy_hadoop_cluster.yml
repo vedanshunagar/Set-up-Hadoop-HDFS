@@ -1,0 +1,11 @@
+- hosts: master
+  roles:
+          - role: master
+
+- hosts: slave
+  roles:
+          - role: slave
+
+- hosts: client
+  roles:
+          - role: client

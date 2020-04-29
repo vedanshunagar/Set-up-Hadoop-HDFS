@@ -1,0 +1,9 @@
+[master]
+master
+
+[client]
+client
+
+[slave]
+slave1
+slave2
