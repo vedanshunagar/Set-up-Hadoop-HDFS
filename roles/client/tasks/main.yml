@@ -1,0 +1,43 @@
+---
+# tasks file for client
+
+#- name: download JDK from FTP server
+#  get_url:
+#        url: ftp://192.168.43.19/pub/jdk-8u171-linux-x64.rpm
+#        dest: /root/
+
+- name: install jdk
+  command: "rpm -ivh /root/jdk-8u171-linux-x64.rpm"
+  ignore_errors: yes
+
+  #- name: download Hadoop RPM from FTP server
+  # get_url:
+  #       url: ftp://192.168.43.19/pub/hadoop-1.2.1-1.x86_64.rpm
+  #       dest: /root/
+
+- name: install hadoop rpm
+  command: "rpm -ivh /root/hadoop-1.2.1-1.x86_64.rpm  --force"
+
+
+- name: set java_home in bashrc file
+  lineinfile:
+          path: /root/.bashrc
+          line: "export JAVA_HOME=/usr/java/jdk1.8.0_171-amd64/"
+- name: set path in bashrc file
+  lineinfile:
+          path: /root/.bashrc
+          line: "PATH=/usr/java/jdk1.8.0_171-amd64/bin/:$PATH"
+
+
+- name: configure hadoop
+  include_tasks:
+          file: configure.yml
+
+
+- name: flush firewall
+  command: "iptables -F"
+- service:
+        name: firewalld
+        state: stopped
+
+

@@ -1,0 +1,5 @@
+- name: configure core-site file
+  template:
+        src: "core-site.xml.j2"
+        dest: "/etc/hadoop/core-site.xml"
+        

@@ -1,0 +1,15 @@
+- name: create directory
+  file:
+        path: "/data"
+        state: directory
+
+- name: configure hdfs file
+  template:
+        src: "hdfs-site.xml.j2"
+        dest: "/etc/hadoop/hdfs-site.xml"
+
+- name: configure core-site file
+  template:
+        src: "core-site.xml.j2"
+        dest: "/etc/hadoop/core-site.xml"
+        
